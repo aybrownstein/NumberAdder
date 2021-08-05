@@ -18,7 +18,7 @@ class NumberTable extends React.Component {
         const {numbers} = this.state;
 const number = this.numberToAdd();
 id++;
-this.setState({numbers: [...numbers, id, number]});
+this.setState({numbers: [...numbers, {id, number}]});
     }
 
   onAddToSelected = number => {
@@ -41,10 +41,10 @@ this.setState({selectedNumbers: [...selectedNumbers, number]});
   }
     
     render() { 
-        const {numbers, selectedNumbers, lockedNumbers} = this.setState;
+        const {numbers, selectedNumbers, lockedNumbers} = this.state;
         return (
             <div className="container" style={{marginTop: 60}}>
-                 <NumberForm onClickAddNumber={this.onClickAddNumber}/>
+                 <NumberForm onClickAdd={this.onClickAddNumber}/>
            <div className="row">
                <div className="col-md-8">
                <table className="table table-striped table-bordered">
@@ -71,7 +71,7 @@ this.setState({selectedNumbers: [...selectedNumbers, number]});
                 </table>
                </div>
            </div>
-{!!SelectedNumbers.length && <SelectedNumbers
+{!!selectedNumbers.length && <SelectedNumbers
 numbers={selectedNumbers}
 lockedNumbers={lockedNumbers}
 onLockChangeClick={this.onLockChangeClick}
